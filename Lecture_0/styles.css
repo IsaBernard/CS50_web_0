@@ -9,3 +9,8 @@ h1 {
 p {
     color:#006dce;
     }
+
+p::selection{
+    color:white;
+    background-color:blue;
+}
