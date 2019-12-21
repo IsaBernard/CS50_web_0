@@ -14,3 +14,15 @@ p::selection{
     color:white;
     background-color: #006d40;
 }
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container > div {
+    background-color: springgreen;
+    font-size: 20px;
+    margin: 20px
+
+}
