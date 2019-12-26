@@ -1,15 +1,10 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return "Hello, world!"
-
-
-@app.route("/<string:name>")
-def hello(name):
-    return f"Hello, {name}!"
+    return render_template('index.html')
 
 
 
