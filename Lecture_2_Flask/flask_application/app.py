@@ -9,6 +9,11 @@ def index():
     return render_template("index.html", names=names)
 
 
+@app.route("/more")
+def more():
+    return render_template("more.html")
+
+
 
 
 
