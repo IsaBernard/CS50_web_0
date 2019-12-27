@@ -2,9 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My website!</title>
+    <title>Is it New Year?</title>
+    <style>
+        body {
+            text-align: center
+        }
+     </style>
 </head>
 <body>
-    <h1>{{ headline }}</h1>
+    {% if new_year %}
+        <h1>Yes! Happy New Year!</h1>
+    {% else %}
+        <h1>NO</h1>
+    {% endif %}
 </body>
 </html>
