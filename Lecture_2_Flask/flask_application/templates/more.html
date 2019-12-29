@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>More</title>
-</head>
-<body>
-    <h1>2nd Page</h1>
+{% extends 'layout.html' %}
 
+{% block heading %}
+    2nd Page
+{% endblock %}
+
+{% block body %}
     <p>
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
         magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -15,6 +13,4 @@
     </p>
 
     <a href="{{ url_for('index') }}">Go back</a>
-
-</body>
-</html>
+{% endblock %}

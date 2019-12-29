@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Names for loop</title>
+{% extends 'layout.html' %}
 
-</head>
-<body>
+{% block heading %}
+    First page
+{% endblock %}
 
-    <h1>Names</h1>
-
+{% block body %}
     <ul>
         {% for name in names %}
             <li>{{ name }}</li>
@@ -16,5 +12,4 @@
     </ul>
 
     <a href="{{ url_for('more') }}">See more here:  </a>
-</body>
-</html>
+{% endblock %}
