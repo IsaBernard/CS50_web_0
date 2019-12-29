@@ -5,11 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <ul>
-        {% for name in names %}
-            <li>{{ name }}</li>
-        {% endfor %}
-    </ul>
-
-    <a href="{{ url_for('more') }}">See more here:  </a>
+    <form action="{{ url_for('hello') }}" method="post">
+        <input type="text" name="name" placeholder="Enter your name: ">
+        <button>Submit</button>
+    </form>
 {% endblock %}

@@ -1,12 +1,17 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def index():
-    names = ["Alice", "Bob", "Isa"]
-    return render_template("index.html", names=names)
+    return render_template("index.html")
+
+
+@app.route("/hello_2", methods=["POST"])
+def hello():
+    name = request.form.get("name")
+    return render_template("hello_2.html", name=name)
 
 
 @app.route("/more")
