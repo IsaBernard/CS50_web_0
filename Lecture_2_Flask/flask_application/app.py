@@ -8,10 +8,13 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/hello_2", methods=["POST"])
+@app.route("/hello_2", methods=["POST", "GET"])
 def hello():
-    name = request.form.get("name")
-    return render_template("hello_2.html", name=name)
+    if request.method == "GET":
+        return "Please submit the form instead"
+    else:
+        name = request.form.get("name")
+        return render_template("hello_2.html", name=name)
 
 
 @app.route("/more")
