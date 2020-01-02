@@ -1,18 +1,29 @@
-{% extends 'layout.html' %}
+{% extends 'layout2.html' %}
 
-{% block heading %}
-   Notes
+{% block title %}
+   Flights
 {% endblock %}
 
 {% block body %}
-    <ul>
-        {% for note in notes %}
-            <li>{{note}}</li>
-        {% endfor %}
-    </ul>
+    <h1>Book a Flight</h1>
 
-    <form action="{{ url_for('index') }}" method="post">
-        <input type="text" name="note" placeholder="Enter note here">
-        <button>Add note</button>
+    <form action="{{ url_for('book') }}" method="post">
+
+        <div class="form-group">
+            <select class="form-control" name="flight_id">
+                {% for flight in flights %}
+                    <option value="{{ flight.id }}">{{ flight.origin }} to {{flight.destination}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input class="form-control" name="name" placeholder="Passenger Name">
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary">Book Flight</button>
+        </div>
+
     </form>
 {% endblock %}
