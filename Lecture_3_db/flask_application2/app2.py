@@ -25,6 +25,7 @@ def book():
     try:
         flight_id = int(request.form.get("flight_id"))
     except ValueError:
+        return "Error"
 
 
 
