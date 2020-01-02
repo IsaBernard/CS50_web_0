@@ -15,4 +15,4 @@ def index():
         note = request.form.get("note")
         notes.append(note)
 
-    return render_template("index.html", notes=notes)
+    return render_template("index2.html", notes=notes)

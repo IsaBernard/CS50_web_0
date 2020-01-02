@@ -1,5 +1,8 @@
-from flask import Flask, render_template, request, session
-from flask_session import Session
+import os
+
+from flask import Flask, render_template, request
+from sqlalchemy import create_engine
+from sql
 
 app = Flask(__name__)
 
@@ -8,7 +11,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods = ["GET", "POST"])
 def index():
     if session.get("notes") is None:
         session["notes"] = []
