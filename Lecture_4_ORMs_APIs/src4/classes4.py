@@ -4,11 +4,12 @@ class Flight:
 
     def __init__(self, origin, destination, duration):
 
-        # Keep track of id number.
+        # Keep track of id number. Not declared in __init__.
+        # Will give an automatic id to any new object of class Flight, based on the value of counter then add 1.
         self.id = Flight.counter
         Flight.counter += 1
 
-        # Keep track of passengers.
+        # Keep track of passengers. Not declared in __init__.
         self.passengers = []
 
         # Details about flight.
