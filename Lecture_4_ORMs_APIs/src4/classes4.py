@@ -30,6 +30,7 @@ class Flight:
     def delay(self, amount):
         self.duration += amount
 
+    # append to the list self.passengers passenger p for flight id
     def add_passenger(self, p):
         self.passengers.append(p)
         p.flight_id = self.id
@@ -48,7 +49,7 @@ def main():
 
     # Create passengers.
     alice = Passenger(name="Alice")
-    bob = Passenger(name="Bob")
+    bob = Passenger("Bob")
 
     # Add passengers.
     f1.add_passenger(alice)
