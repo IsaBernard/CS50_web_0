@@ -4,6 +4,7 @@ import requests
 def main():
     res = requests.get("https://api.fixer.io/latest?base=USD&symbols=EUR")
     if res.status_code != 200:
+        print(res.status_code)
         raise Exception("ERROR: API request unsuccessful.")
     data = res.json()
     print(data)
