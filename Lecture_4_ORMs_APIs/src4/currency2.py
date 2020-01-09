@@ -1,5 +1,6 @@
 import requests
 
+
 def main():
     base = input("First Currency: ")
     other = input("Second Currency: ")
@@ -10,6 +11,7 @@ def main():
     data = res.json()
     rate = data["rates"][other]
     print(f"1 {base} is equal to {rate} {other}")
+
 
 if __name__ == "__main__":
     main()
