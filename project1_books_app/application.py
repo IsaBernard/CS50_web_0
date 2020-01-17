@@ -23,9 +23,11 @@ engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
 
-@app.route("/")
+@app.route("/", methods=["POST", "GET"])
 def index():
-    return render_template("index.html")
+    username = request.form.get("username")
+    password = request.form.get("password")
+    return render_template("index.html", username=username, password=password)
 
 
 if __name__ == '__main__':
