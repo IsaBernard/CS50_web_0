@@ -34,3 +34,12 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 
+"""
+To do:
+- créer la page pour register et l'envoyer dans Database
+- ensuite renvoyer à index.
+- dans index essayer pour voir si l'usager est dans la db.
+    - sinon: message, please register
+    - si oui: page welcome
+    
+"""
