@@ -19,15 +19,26 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Set up database
-engine = create_engine(os.getenv("DATABASE_URL"))
-db = scoped_session(sessionmaker(bind=engine))
+# engine = create_engine(os.getenv("DATABASE_URL"))
+# db = scoped_session(sessionmaker(bind=engine))
 
 
-@app.route("/", methods=["POST", "GET"])
+@app.route("/")
 def index():
+    return render_template("index.html")
+
+
+@app.route("/welcome", methods=["POST", "GET"])
+def welcome():
     username = request.form.get("username")
     password = request.form.get("password")
-    return render_template("index.html", username=username, password=password)
+    return render_template("welcome.html", username=username, password=password)
+
+
+@app.route("/register")
+def register():
+    return render_template("register.html")
+
 
 
 if __name__ == '__main__':
