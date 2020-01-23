@@ -28,7 +28,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/welcome", methods=["POST", "GET"])
+@app.route("/welcome", methods=["POST"])
 def welcome():
     username = request.form.get("username")
     password = request.form.get("password")
