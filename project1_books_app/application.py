@@ -51,9 +51,8 @@ if __name__ == '__main__':
 """
 To do:
 - créer la page pour register et l'envoyer dans Database
-- ensuite renvoyer à index.
 - dans index essayer pour voir si l'usager est dans la db.
-    - sinon: message, please register
+    - sinon: pas register
     - si oui: page welcome
     
 """
