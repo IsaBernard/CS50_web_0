@@ -6,24 +6,13 @@
 
 {% block body %}
     <h1>Login</h1>
-
-    <form action="{{ url_for('index') }}" method="post">
-
-        <div class="form-group">
-            <input class="form-control" name="user" placeholder="User ID">
-            <input name="password" type="password" placeholder="Password">
-            <p></p>
-
-            <div class="form-group">
-                <button class="btn btn-primary">Login</button>
-            </div>
-
-            <p>Not registered yet?</p>
-
-            <div class="form-group">
-            <button class="btn btn-primary">Register</button>
-            </div>
-        </div>
-
+    <form action="{{ url_for('welcome') }}" method="post">
+        <input class="form-control" name="username" placeholder="User ID">
+        <input name="password" type="password" placeholder="Password">
+        <button class="btn btn-primary">Login</a></button>
     </form>
+
+    <h2>Not registered yet?</h2>
+    <a href = "{{url_for('register')}}"><button class="btn btn-primary">Register</button></a>
+
 {% endblock %}
