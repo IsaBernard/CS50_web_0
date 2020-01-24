@@ -26,9 +26,10 @@ db = scoped_session(sessionmaker(bind=engine))
 @app.route("/")
 def index():
     username = request.form.get("username")
-    password = request.form.ger("password")
+    password = request.form.get("password")
     user = db.execute("SELECT username from users "
-                      "WHERE username=username AND password=password")
+                      "WHERE username=:username AND password=:password",
+                      {"username": username, "password": password}).fetchone()
     db.commit()
     if user is None:
         return "Invalid login"
@@ -50,7 +51,8 @@ def register():
     username = request.form.get("username")
     password = request.form.ger("password")
     user = db.execute("SELECT username from users "
-                      "WHERE username=username")
+                      "WHERE username=:username",
+                      {"username": username}).fetchone()
     db.commit()
     if user is None:
         return render_template("register.html")
@@ -73,11 +75,9 @@ if __name__ == '__main__':
 
 """
 To do:
-- créer la page pour register et l'envoyer dans Database
-- dans index essayer pour voir si l'usager est dans la db.
-    - sinon: pas register
-    - si oui: page welcome
-
-- lorsque nous ferons les pages de livres, il faut le faire par session
+- créer les tables users et books.
+- plutôt que de return Please register or login, créer un template error.html
+- changer la variable message du template.
+- 1:25:49
     
 """
