@@ -54,5 +54,7 @@ To do:
 - dans index essayer pour voir si l'usager est dans la db.
     - sinon: pas register
     - si oui: page welcome
+
+- lorsque nous ferons les pages de livres, il faut le faire par session
     
 """
