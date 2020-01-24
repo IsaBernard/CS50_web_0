@@ -25,7 +25,15 @@ db = scoped_session(sessionmaker(bind=engine))
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    username = request.form.get("username")
+    password = request.form.ger("password")
+    user = db.execute("SELECT username from users "
+                      "WHERE username=username AND password=password")
+    db.commit()
+    if user is None:
+        return "Invalid login"
+    else:
+        return render_template("index.html", username=username, password=password)
 
 
 @app.route("/welcome", methods=["GET", "POST"])
@@ -39,7 +47,15 @@ def welcome():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    return render_template("register.html")
+    username = request.form.get("username")
+    password = request.form.ger("password")
+    user = db.execute("SELECT username from users "
+                      "WHERE username=username")
+    db.commit()
+    if user is None:
+        return render_template("register.html")
+    else:
+        return "username already taken"
 
 
 @app.route("/thanks", methods=["GET", "POST"])
