@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    Thanks
+{% endblock %}
+
+{% block body %}
+<h1>Thanks for registering {{ username }}!</h1>
+<a href = "{{ url_for('index')}}">Go back to sign-in page</a>
+
+{% endblock %}

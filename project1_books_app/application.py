@@ -31,16 +31,24 @@ def index():
 @app.route("/welcome", methods=["GET", "POST"])
 def welcome():
     if request.method == "GET":
-        return render_template("register.html")
+        return "Please login first."
     else:
         username = request.form.get("username")
-        password = request.form.get("password")
-        return render_template("welcome.html", username=username, password=password)
+        return render_template("welcome.html", username=username)
 
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
     return render_template("register.html")
+
+
+@app.route("/thanks", methods=["GET", "POST"])
+def thanks():
+    if request.method == "GET":
+        return "Please register or login first."
+    else:
+        username = request.form.get("username")
+        return render_template("thanks.html", username=username)
 
 
 
