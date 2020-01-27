@@ -52,6 +52,8 @@ def new():
     username = request.form.get("new_username")
     password = request.form.get("new_password")
 
+    if db.execute("SELECT * from users WHERE username = :username", {"username": username}).rowcount > 0:
+        return render_template("error.html", message="User already exists.")
     try:
         db.execute("INSERT INTO users (username, password) VALUES (:username, :password)",
                    {"username": username, "password": password})
