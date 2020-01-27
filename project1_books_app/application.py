@@ -25,22 +25,20 @@ db = scoped_session(sessionmaker(bind=engine))
 
 @app.route("/")
 def index():
-    username = request.form.get("username")
-    password = request.form.get("password")
-    if db.execute("SELECT username from users "
-                  "WHERE username=:username AND password=:password",
-                  {"username": username, "password": password}).rowcount == 0:
-        return render_template("error.html", message="invalid login info")
-    return render_template("index.html", username=username, password=password)
+    return render_template("index.html")
 
 
 @app.route("/welcome", methods=["GET", "POST"])
 def welcome():
     if request.method == "GET":
         return render_template("error.html", message="Please login first")
-    else:
-        username = request.form.get("username")
-        return render_template("welcome.html", username=username)
+    username = request.form.get("username")
+    password = request.form.get("password")
+    if db.execute("SELECT username from users "
+                  "WHERE username=:username AND password=:password",
+                  {"username": username, "password": password}).rowcount == 0:
+        return render_template("error.html", message="invalid login info")
+    return render_template("welcome.html", username=username)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -56,7 +54,7 @@ def register():
     db.execute("INSERT INTO users (username, password) VALUES (:username, :password)",
                {"username": username, "password": password})
     db.commit()
-    return render_template("thanks.html", username=username)
+    return render_template("register.html", username=username)
 
 
 @app.route("/thanks", methods=["GET", "POST"])
