@@ -40,38 +40,30 @@ if not engine.dialect.has_table(engine, "users"):
     db.commit()
 
 
-## ici CHANGER ou arranger. REgister ne foncitonne pas.
-
-
 @app.route("/")
 def index():
     return render_template("index.html")
 
 
-@app.route("/register", methods=["GET", "POST"])
-def register():
-
-    # ici problème = username n'existe pas encore et ne peut pas être null alors il faut l'insérer dans la table users
+@app.route("/new", methods=["POST"])
+def new():
+    """Register a new user."""
 
     username = request.form.get("new_username")
     password = request.form.get("new_password")
 
-    if db.execute("SELECT * from users WHERE username=:username",
-                  {"username": username}).rowcount >=0:
-        return render_template("error.html", message="User already taken")
-
-    db.execute("INSERT INTO users (username, password) VALUES (:username, :password)",
-               {"username": username, "password": password})
-    db.commit()
-    return render_template("thanks.html", username=username)
-
-
-@app.route("/thanks", methods=["GET", "POST"])
-def thanks():
-    if request.method == "GET":
-        return render_template("error.html", message="Please register or login first")
+    try:
+        db.execute("INSERT INTO users (username, password) VALUES (:username, :password)",
+                   {"username": username, "password": password})
+        db.commit()
+    except ValueError:
+        return render_template("error.html", message="Insertion did not work")
+    return render_template("thanks.html")
 
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    return render_template("register.html")
 
 
 @app.route("/welcome", methods=["GET", "POST"])
