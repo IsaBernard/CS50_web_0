@@ -32,7 +32,9 @@ def index():
                       {"username": username, "password": password}).fetchone()
     db.commit()
     if user is None:
-        return "Invalid login"
+        return render_template("error.html", message="Invalid info")
+    # ici, probablement que else = render template welcome.html.
+    # et que dans index il ne faut pas mettre le {{ url for welcome }}
     else:
         return render_template("index.html", username=username, password=password)
 
@@ -40,7 +42,8 @@ def index():
 @app.route("/welcome", methods=["GET", "POST"])
 def welcome():
     if request.method == "GET":
-        return "Please login first."
+        return render_template("error.html", message="Please login first")
+
     else:
         username = request.form.get("username")
         return render_template("welcome.html", username=username)
@@ -57,13 +60,13 @@ def register():
     if user is None:
         return render_template("register.html")
     else:
-        return "username already taken"
+        return render_template("error.html", message="User already taken")
 
 
 @app.route("/thanks", methods=["GET", "POST"])
 def thanks():
     if request.method == "GET":
-        return "Please register or login first."
+        return render_template("error.html", message="Please register or login first")
     else:
         username = request.form.get("username")
         return render_template("thanks.html", username=username)
@@ -76,8 +79,5 @@ if __name__ == '__main__':
 """
 To do:
 - créer les tables users et books.
-- plutôt que de return Please register or login, créer un template error.html
-- changer la variable message du template.
-- 1:25:49
     
 """
