@@ -40,6 +40,9 @@ if not engine.dialect.has_table(engine, "users"):
     db.commit()
 
 
+## ici CHANGER ou arranger. REgister ne foncitonne pas.
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -47,12 +50,20 @@ def index():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+
+    # ici problème = username n'existe pas encore et ne peut pas être null alors il faut l'insérer dans la table users
+
     username = request.form.get("new_username")
     password = request.form.get("new_password")
+
+    if db.execute("SELECT * from users WHERE username=:username",
+                  {"username": username}).rowcount >=0:
+        return render_template("error.html", message="User already taken")
+
     db.execute("INSERT INTO users (username, password) VALUES (:username, :password)",
                {"username": username, "password": password})
     db.commit()
-    return render_template("register.html")
+    return render_template("thanks.html", username=username)
 
 
 @app.route("/thanks", methods=["GET", "POST"])
@@ -60,19 +71,7 @@ def thanks():
     if request.method == "GET":
         return render_template("error.html", message="Please register or login first")
 
-    username = request.form.get("new_username")
-    password = request.form.get("new_password")
-    user = db.execute("SELECT username from users "
-                      "WHERE username=:username",
-                      {"username": username}).fetchone()
-    if user is not None:
-        return render_template("error.html", message="User already taken")
-    else:
-        username = request.form.get("username")
-        db.execute("INSERT INTO users (username, password) VALUES (:username, :password)",
-                   {"username": username, "password": password})
-        db.commit()
-        return render_template("thanks.html", username=username)
+
 
 
 @app.route("/welcome", methods=["GET", "POST"])
