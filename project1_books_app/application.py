@@ -59,7 +59,6 @@ def register():
     return render_template("thanks.html", username=username)
 
 
-
 @app.route("/thanks", methods=["GET", "POST"])
 def thanks():
     if request.method == "GET":
