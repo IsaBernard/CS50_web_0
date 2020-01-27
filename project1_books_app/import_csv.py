@@ -9,7 +9,15 @@ db = scoped_session(sessionmaker(bind=engine))
 
 
 def main():
-    # first create the table!
+    # if table books doesn't exist, create it
+    if not engine.dialect.has_table(engine, "books"):
+        db.execute('CREATE TABLE "books" ('
+                   'isbn Integer NOT NULL,'
+                   'title VARCHAR NOT NULL,'
+                   'author VARCHAR NOT NULL,'
+                   'year INTEGER NOT NULL,'
+                   'PRIMARY KEY (isbn));')
+        db.commit()
 
     f = open("books.csv")
     reader = csv.reader(f)
@@ -17,6 +25,7 @@ def main():
         db.execute("INSERT INTO books (isbn, title, author, year) "
                    "VALUES (:isbn, :title, :author, :year)",
                    {"isbn": isbn, "title": title, "author": author, "year": year})
+        print(f'Added {title}.')
     db.commit()
 
 
