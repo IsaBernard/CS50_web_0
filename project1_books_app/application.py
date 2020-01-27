@@ -37,7 +37,7 @@ def welcome():
     if db.execute("SELECT username from users "
                   "WHERE username=:username AND password=:password",
                   {"username": username, "password": password}).rowcount == 0:
-        return render_template("error.html", message="invalid login info")
+        return render_template("error.html", message="Invalid login info.")
     return render_template("welcome.html", username=username)
 
 
