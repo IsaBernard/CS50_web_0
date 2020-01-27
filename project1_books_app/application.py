@@ -22,6 +22,21 @@ Session(app)
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
+if not engine.dialect.has_table(engine, "books"):
+    db.execute('CREATE TABLE "books" ('
+               'isbn Integer NOT NULL,'
+               'title VARCHAR NOT NULL,'
+               'author VARCHAR NOT NULL,'
+               'year INTEGER NOT NULL,'
+               'PRIMARY KEY (isbn));')
+    db.commit()
+if not engine.dialect.has_table(engine, "users"):
+    db.execute('CREATE TABLE "users" ('
+               'username VARCHAR PRIMARY KEY,'
+               'password VARCHAR NOT NULL);'
+               )
+    db.commit()
+
 
 @app.route("/")
 def index():
@@ -44,7 +59,7 @@ def welcome():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     username = request.form.get("new_username")
-    password = request.form.ger("new_password")
+    password = request.form.get("new_password")
     user = db.execute("SELECT username from users "
                       "WHERE username=:username",
                       {"username": username}).fetchone()
@@ -68,9 +83,3 @@ def thanks():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-"""
-To do:
-- créer les tables users et books.
-    
-"""
