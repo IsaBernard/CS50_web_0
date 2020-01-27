@@ -27,16 +27,7 @@ db = scoped_session(sessionmaker(bind=engine))
 def index():
     username = request.form.get("username")
     password = request.form.get("password")
-    user = db.execute("SELECT username from users "
-                      "WHERE username=:username AND password=:password",
-                      {"username": username, "password": password}).fetchone()
-    db.commit()
-    if user is None:
-        return render_template("error.html", message="Invalid info")
-    # ici, probablement que else = render template welcome.html.
-    # et que dans index il ne faut pas mettre le {{ url for welcome }}
-    else:
-        return render_template("index.html", username=username, password=password)
+    return render_template("index.html", username=username, password=password)
 
 
 @app.route("/welcome", methods=["GET", "POST"])
@@ -44,8 +35,13 @@ def welcome():
     if request.method == "GET":
         return render_template("error.html", message="Please login first")
 
+    username = request.form.get("username")
+    password = request.form.get("password")
+    if db.execute("SELECT username from users "
+                  "WHERE username=:username AND password=:password",
+                  {"username": username, "password": password}).rowcount == 0:
+        return render_template("error.html", message="invalid login info")
     else:
-        username = request.form.get("username")
         return render_template("welcome.html", username=username)
 
 
@@ -58,7 +54,7 @@ def register():
                       {"username": username}).fetchone()
     db.commit()
     if user is None:
-        return render_template("register.html")
+        return render_template("register.html", username=username, password=password)
     else:
         return render_template("error.html", message="User already taken")
 
@@ -74,7 +70,6 @@ def thanks():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
 
 """
 To do:
