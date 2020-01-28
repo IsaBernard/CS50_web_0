@@ -23,9 +23,9 @@ engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
 # if table books doesn't exist, create it
-if not engine.dialect.has_table(engine, "books"):
-    db.execute('CREATE TABLE "books" ('
-               'isbn Integer NOT NULL,'
+if not engine.dialect.has_table(engine, "books4"):
+    db.execute('CREATE TABLE "books4" ('
+               'isbn VARCHAR NOT NULL,'
                'title VARCHAR NOT NULL,'
                'author VARCHAR NOT NULL,'
                'year INTEGER NOT NULL,'
