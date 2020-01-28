@@ -1,7 +1,0 @@
-set API_KEY=rs0FMt22nijlGe2eBNP9Xg
-
-set DATABASE_URL=postgres://xmopvkurfbfkmr:f5131efe476d36c5c90561f9b3c771186e2eff86d8f582b65e14c610d582e992@ec2-174-129-33-156.compute-1.amazonaws.com:5432/d1shj1am4mh41i
-
-set FLASK_APP=application.py
-
-set FLASK_DEBUG=1
