@@ -45,6 +45,12 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/test_password")
+def test():
+    users = db.execute("SELECT username, password FROM users").fetchall()
+    return render_template("test.html", users=users)
+
+
 @app.route("/new", methods=["POST"])
 def new():
     """Register a new user."""
