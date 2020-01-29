@@ -6,6 +6,20 @@
 
 {% block body %}
     <h1>Hello, {{ username }}! You can search for books here.</h1>
+    <form action="{{ url_for('search_result') }}" method="post">
+        <div class="form-group">
+            <input class="form-control" name="isbn" placeholder="ISBN">
+            <input class="form-control" name="title" placeholder="Title">
+            <input class="form-control" name="author" placeholder="Author name">
+            <input class="form-control" name="year" placeholder="year">
+        </div>
+        <div class="form-group">
+        <button class="btn btn-primary">Search</a></button>
+        </div>
+    </form>
+
+
+
 
     <p>
     <a href = "{{url_for('logout')}}"><button class="btn btn-primary">Click here to logout.</button></a>

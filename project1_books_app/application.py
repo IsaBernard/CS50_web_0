@@ -87,6 +87,20 @@ def search_book():
     return render_template("search_book.html", username=username)
 
 
+@app.route("/search_result", methods=["POST"])
+def search_result():
+    isbn = request.form.get("isbn", '')
+    title = request.form.get("title", '')
+    author = request.form.get("author", '')
+    year = request.form.get("year", '')
+    result = db.execute("SELECT * from books4 "
+                        "WHERE isbn=:isbn OR title=:title OR author=:author OR year=:year",
+                        {"isbn": isbn, "title": title, "author": author, "year": year}).fetchall()
+    if result is None:
+        print('Sorry no result')
+    return render_template('search_result.html', isbn=isbn, title=title, author=author, year=year)
+
+
 @app.route("/logout")
 def logout():
     """ Log user out """
