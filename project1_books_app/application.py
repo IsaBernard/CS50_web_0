@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -87,6 +87,17 @@ def welcome():
     return render_template("welcome.html", username=username)
 
 
+@app.route("/logout")
+def logout():
+    """ Log user out """
+
+    # Forget any user ID
+    session.clear()
+
+    # Redirect user to login form
+    return redirect("/")
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
@@ -103,7 +114,7 @@ a username and password.
 - OK Login: Users, once registered, should be able to log in to your website with their 
 username and password.
 
-- TO DO: Logout: Logged in users should be able to log out of the site.
+- OK (copié d'un exemple): Logout: Logged in users should be able to log out of the site.
 Hint: In terms of how to “log a user in,” recall that you can store information inside of the 
 session, which can store different values for different users. In particular, if each user has 
 an id, then you could store that id in the session (e.g., in session["user_id"]) to keep track 

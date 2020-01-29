@@ -6,4 +6,8 @@
 
 {% block body %}
     Hello, {{ username }}! You successfully logged in :)
+
+    <p>
+    <a href = "{{url_for('logout')}}"><button class="btn btn-primary">Click here to logout.</button></a>
+    </p>
 {% endblock %}
