@@ -74,8 +74,8 @@ def register():
     return render_template("register.html")
 
 
-@app.route("/welcome", methods=["GET", "POST"])
-def welcome():
+@app.route("/search_book", methods=["GET", "POST"])
+def search_book():
     if request.method == "GET":
         return render_template("error.html", message="Please login first")
     username = request.form.get("username")
@@ -84,7 +84,7 @@ def welcome():
                   "WHERE username=:username AND password=:password",
                   {"username": username, "password": password}).rowcount == 0:
         return render_template("error.html", message="Invalid login info.")
-    return render_template("welcome.html", username=username)
+    return render_template("search_book.html", username=username)
 
 
 @app.route("/logout")
