@@ -74,7 +74,7 @@ def register():
     return render_template("register.html")
 
 
-@app.route("/search_book", methods=["GET", "POST"])
+@app.route("/search_book", methods=["POST"])
 def search_book():
     if request.method == "GET":
         return render_template("error.html", message="Please login first")
@@ -96,9 +96,8 @@ def search_result():
     result = db.execute("SELECT * from books4 "
                         "WHERE isbn=:isbn OR title=:title OR author=:author OR year=:year",
                         {"isbn": isbn, "title": title, "author": author, "year": year}).fetchall()
-    if result is None:
-        print('Sorry no result')
-    return render_template('search_result.html', isbn=isbn, title=title, author=author, year=year)
+
+    return render_template('search_result.html', result=result, title=title, author=author, year=year)
 
 
 @app.route("/logout")

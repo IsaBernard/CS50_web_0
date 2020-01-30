@@ -13,4 +13,11 @@
             <li>No user.</li>
         {% endfor %}
     </ul>
+    <ul>
+        {% for book in books %}
+            <li>{{ book.isbn }} {{book.title}}</li>
+        {% else %}
+            <li>No user.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

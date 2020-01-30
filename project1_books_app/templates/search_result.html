@@ -9,16 +9,18 @@
 
     <ul>
         {% for book in result %}
-        <li>{{ book.isbn }}</li>
-        <li>{{ book.title }}</li>
-        <li>{{ book.author }}</li>
-        <li>{{ book.year }}</li>
+        <li>ISBN: {{ book.isbn }}, Title: {{ book.title }}, Author {{ book.author }},
+        Year: {{ book.year }}</li>
         {% else %}
             <li>No result corresponding.</li>
         {% endfor %}
     </ul>
 
+    <p>
+    <form action = "{{url_for('search_book')}}" method="post">
+        <button class="btn btn-primary">Click here to go back to search.</button></form>
 
+    </p>
     <p>
     <a href = "{{url_for('logout')}}"><button class="btn btn-primary">Click here to logout.</button></a>
     </p>
