@@ -96,7 +96,6 @@ def search_result():
     result = db.execute("SELECT * from books4 "
                         "WHERE isbn=:isbn OR title=:title OR author=:author OR year=:year",
                         {"isbn": isbn, "title": title, "author": author, "year": year}).fetchall()
-
     return render_template('search_result.html', result=result, title=title, author=author, year=year)
 
 
