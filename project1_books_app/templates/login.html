@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block body %}
+Successfully logged in.
+
+<p>
+    <form action = "{{url_for('search_book')}}" method="post"><button class="btn btn-primary">Click here to search for books.</button></a>
+    </p>
+
+<p>
+    <a href = "{{url_for('logout')}}"><button class="btn btn-primary">Click here to logout.</button></a>
+    </p>
+
+
+{% endblock %}

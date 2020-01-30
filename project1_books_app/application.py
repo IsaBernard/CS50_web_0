@@ -45,6 +45,17 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/login", methods=["POST"])
+def login():
+    username = request.form.get("username")
+    password = request.form.get("password")
+    if db.execute("SELECT username from users "
+                  "WHERE username=:username AND password=:password",
+                  {"username": username, "password": password}).rowcount == 0:
+        return render_template("error.html", message="Invalid login info.")
+    return render_template("login.html", username=username, password=password)
+
+
 @app.route("/test_password")
 def test():
     users = db.execute("SELECT username, password FROM users").fetchall()
@@ -78,12 +89,7 @@ def register():
 def search_book():
     if request.method == "GET":
         return render_template("error.html", message="Please login first")
-    username = request.form.get("username")
-    password = request.form.get("password")
-    if db.execute("SELECT username from users "
-                  "WHERE username=:username AND password=:password",
-                  {"username": username, "password": password}).rowcount == 0:
-        return render_template("error.html", message="Invalid login info.")
+    username = request.form.get("new_username")
     return render_template("search_book.html", username=username)
 
 
