@@ -9,7 +9,6 @@
 
     <ul>
         {% for book in result %}
-        <a href="{{ url_for('book', book_ISBN=book.isbn }}">
         <li>ISBN: {{ book.isbn }}, Title: {{ book.title }}, Author {{ book.author }},
         Year: {{ book.year }}</li>
         {% else %}
