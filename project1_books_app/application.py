@@ -105,6 +105,12 @@ def search_result():
     return render_template('search_result.html', result=result, title=title, author=author, year=year)
 
 
+@app.route("/book", methods=["POST"])
+def book():
+    """See particular result of a book."""
+    return render_template("book.html")
+
+
 @app.route("/logout")
 def logout():
     """ Log user out """
