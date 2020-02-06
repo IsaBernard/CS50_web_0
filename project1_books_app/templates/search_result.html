@@ -9,8 +9,13 @@
 
     <ul>
         {% for book in result %}
-        <li>ISBN: {{ book.isbn }}, Title: {{ book.title }}, Author {{ book.author }},
-        Year: {{ book.year }}</li>
+        <li>
+
+            ISBN: {{ book.isbn }}, Title: {{ book.title }}, Author {{ book.author }},
+        Year: {{ book.year }}
+            <a href="{{ url_for('book') }}"></a>
+
+        </li>
         {% else %}
             <li>No result corresponding.</li>
         {% endfor %}
