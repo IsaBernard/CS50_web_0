@@ -14,7 +14,7 @@ def index():
     flights = db.execute("SELECT * FROM flights").fetchall()
     return render_template("index.html", flights=flights)
 
-@app.route("/book", methods=["POST"])
+@app.route("/flight", methods=["POST"])
 def book():
     """Book a flight."""
 
