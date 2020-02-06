@@ -123,7 +123,8 @@ if __name__ == '__main__':
 TO DO:
 - One table for reviews
 
-- Search: If the user typed  in only part of a title, ISBN, or author name, your search page should find matches for those as well!
+- Search: If the user typed  in only part of a title, ISBN, or author name, your search page should find matches for 
+those as well!
  
 - Book Page: When users click on a book from the results of the search page, they should 
 be taken to a book page, with details about the book: its title, author, publication year, 

@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    {{ book.isbn }}
+{% endblock %}
+
+{% block body %}
+    <h1>ISBN: {{ book.isbn }}, Title: {{ book.title }}, Author {{ book.author }},
+        Year: {{ book.year }}</h1>
+{% endblock %}
