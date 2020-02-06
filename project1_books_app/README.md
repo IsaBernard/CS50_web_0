@@ -1,4 +1,4 @@
-# Project 1 CS50 eb Programming with Python and JavaScript
+# Project 1 CS50W Web Programming with Python and JavaScript
 
 Overview
 In this project, you’ll build a book review website.
