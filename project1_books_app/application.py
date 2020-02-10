@@ -93,7 +93,7 @@ def search_book():
     return render_template("search_book.html", username=username)
 
 
-@app.route("/search_result")#, methods=["POST"])
+@app.route("/search_result", methods=["POST"])
 def search_result():
     isbn = request.form.get("isbn", '')
     title = request.form.get("title", '')
@@ -105,7 +105,7 @@ def search_result():
     return render_template('search_result.html', result=result, title=title, author=author, year=year)
 
 
-@app.route("/book/<book_isbn>", methods=["POST"])
+@app.route("/book/<book_isbn>") #, methods=["POST"])
 def book(book_isbn):
     this_book = db.execute("SELECT * from books4 WHERE isbn=:book_isbn", {"book_isbn": book_isbn}).fetchone()
     return render_template("book.html", book=book, this_book=this_book)
