@@ -1,4 +1,5 @@
 import os
+import requests
 
 from flask import Flask, render_template, request, session, redirect
 from flask_session import Session
@@ -38,6 +39,8 @@ if not engine.dialect.has_table(engine, "users"):
                'password VARCHAR NOT NULL);'
                )
     db.commit()
+
+API_KEY = os.getenv('API_KEY')
 
 
 @app.route("/")
@@ -108,7 +111,10 @@ def search_result():
 @app.route("/book/<book_isbn>") #, methods=["POST"])
 def book(book_isbn):
     this_book = db.execute("SELECT * from books4 WHERE isbn=:book_isbn", {"book_isbn": book_isbn}).fetchone()
-    return render_template("book.html", book=book, this_book=this_book)
+    res = requests.get("https://www.goodreads.com/book/review_counts.json",
+                       params={"key": API_KEY, "isbns": book_isbn})
+    book_gr = res.json()
+    return render_template("book.html", book=book, this_book=this_book, book_gr=book_gr)
 
 
 @app.route("/logout")
