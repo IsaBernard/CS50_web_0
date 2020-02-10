@@ -105,10 +105,10 @@ def search_result():
     return render_template('search_result.html', result=result, title=title, author=author, year=year)
 
 
-@app.route("/book/<isbn>")#, methods=["POST"])
-def book():
-    # HERE must define and pass for previous page, title, author and year. Then need to be linked to API
-    return render_template("book.html", book=book)
+@app.route("/book/<book_isbn>")#, methods=["POST"])
+def book(book_isbn):
+    this_book = db.execute("SELECT * from books4 WHERE isbn=:book_isbn", {"book_isbn": book_isbn}).fetchone()
+    return render_template("book.html", book=book, this_book=this_book)
 
 
 @app.route("/logout")
