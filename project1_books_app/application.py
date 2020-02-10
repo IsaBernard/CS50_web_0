@@ -105,9 +105,8 @@ def search_result():
     return render_template('search_result.html', result=result, title=title, author=author, year=year)
 
 
-@app.route("/book")#, methods=["POST"])
+@app.route("/book/<isbn>")#, methods=["POST"])
 def book():
-    """See particular result of a book."""
     # HERE must define and pass for previous page, title, author and year. Then need to be linked to API
     return render_template("book.html", book=book)
 
