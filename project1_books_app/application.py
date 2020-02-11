@@ -113,8 +113,8 @@ def book(book_isbn):
     this_book = db.execute("SELECT * from books4 WHERE isbn=:book_isbn", {"book_isbn": book_isbn}).fetchone()
     res = requests.get("https://www.goodreads.com/book/review_counts.json",
                        params={"key": API_KEY, "isbns": book_isbn})
-    book_gr = res.json()
-    return render_template("book.html", book=book, this_book=this_book, book_gr=book_gr)
+    book_gr = res.json()['books']
+    return render_template("book.html", book=book, this_book=this_book, book_gr=book_gr
 
 
 @app.route("/logout")
